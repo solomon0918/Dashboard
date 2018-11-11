@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" id="loginMain">
     <div class="row">
       <div class="card">
         <div class="card-body">
@@ -8,7 +8,13 @@
           </div>
           <br/>
           <div class="col-sm-12 col-md-12 col-lg-12">
-            <form action="" id="loginForm">
+            <form @submit.prevent="authenticate" id="loginForm">
+              <div class="alert alert-danger alert-dismissible fade show" role="alert" v-if="authError">
+                {{ authError }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
               <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -16,7 +22,7 @@
                             <i class="fa fa-envelope"></i>
                         </span>
                     </div>
-                    <input id="email" type="email" class="form-control" name="email" placeholder="E-Mail Address" required autofocus>
+                    <input id="email" type="email" class="form-control" v-model="form.email" name="email" placeholder="E-Mail Address" required autofocus>
                 </div>
               </div>
               <div class="form-group">
@@ -26,7 +32,7 @@
                           <i class="fa fa-lock"></i>
                       </span>
                   </div>
-                  <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
+                  <input id="password" type="password" class="form-control" v-model="form.password" name="password" placeholder="Password" required>
                 </div>
               </div>
 
@@ -47,6 +53,12 @@
                     Forgot Your Password?
                 </a>
               </div>
+              <hr>
+              <div class="form-group">
+                <a class="btn btn-secondary" href="/register">
+                    <i class="fa fa-sign-in"></i> Create Account
+                </a>
+              </div>
             </form>        
           </div>  
         </div>
@@ -62,7 +74,9 @@ body{
   background-size: cover;
   background-repeat: no-repeat;
 }
+</style>
 
+<style scoped>
 .card {
   margin: auto;
   position: absolute;
@@ -70,13 +84,16 @@ body{
 }
 
 .card {
-  height: 60%;
-  min-width: 300px;
-  max-width: 500px;
+  height: 65%;
+  min-width: 400px;
+  max-width: 550px;
   padding: 40px;
 }
-
+.error{
+    text-align: center;
+}
 </style>
+
 
 <script>
   import {login} from '../../helpers/auth';
@@ -92,6 +109,9 @@ body{
             error: null
         }
     },
+    created: function(){
+        // document.querySelector('body').style.backgroundColor = 'blue';
+    },
     methods: {
         authenticate(){
             this.$store.dispatch('login');
@@ -99,7 +119,10 @@ body{
             login(this.$data.form)
                 .then((res) => {
                     this.$store.commit("loginSuccess", res);
-                    this.$router.push({ path: '/' });
+                    this.$router.go({
+                        path: '/',
+                        force: true
+                    });
                 })
                 .catch((error) => {
                     this.$store.commit("loginFailed", {error});

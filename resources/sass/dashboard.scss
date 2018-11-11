@@ -1,0 +1,55 @@
+body{
+    background-image: url("/img/traffic-background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.loader {
+    margin-left: 45%;
+    border: 10px solid #f3f3f3; /* Light grey */
+    border-top: 10px solid orange; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.required-field{
+	color: #f86c6b;
+	font-size: 18px;
+}
+
+.dataTable > thead > tr > th[class*="sort"]:after{
+    content: "" !important;
+}
+
+.dataTable > thead > tr > th[class*="sort"]:before{
+    content: "" !important;
+}
+
+table.dataTable thead > tr > th.sorting_asc, 
+table.dataTable thead > tr > th.sorting_desc, 
+table.dataTable thead > tr > th.sorting, 
+table.dataTable thead > tr > td.sorting_asc, 
+table.dataTable thead > tr > td.sorting_desc, 
+table.dataTable thead > tr > td.sorting {
+    padding-right: inherit;
+}
+
+.modal-content {
+    border-radius: 0;
+}
+
+.sidebar .router-link-exact-active{
+  color: #fff !important;
+  background: #3a4248 !important;
+}
+
+.sidebar .router-link-exact-active .nav-icon{
+    color: #20a8d8 !important;
+}

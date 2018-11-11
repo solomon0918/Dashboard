@@ -1,3 +1,14 @@
+global.jQuery = require('jquery');
+var $ = global.jQuery;
+window.$ = $;
+
+require("../../public/js/plugins/@coreui/coreui/dist/css/coreui.min.css");
+
+require("../../public/js/plugins/jquery/dist/jquery.min.js");
+require("../../public/js/plugins/popper.js/dist/umd/popper.min.js");
+require("../../node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js");
+require("../../public/js/plugins/@coreui/coreui/dist/js/coreui.min.js");
+
 require('./bootstrap');
 
 import Vue from 'vue';

@@ -1,6 +1,5 @@
 export function initialize(router, store){
     router.beforeEach((to, from, next) => {
-    	debugger
         const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
         const currentUser = store.state.currentUser;
     
@@ -9,7 +8,11 @@ export function initialize(router, store){
         }else if(to.path == '/login' && currentUser){
             next('/');
         }else{
-            next();
+            if(to.matched.length > 0){
+                next();
+            }else{
+                next('/');
+            }
         }
     });
     
